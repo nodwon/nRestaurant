@@ -11,20 +11,24 @@ import org.springframework.util.MultiValueMap;
 @NoArgsConstructor
 public class SearchImageReq {
 
-    private String quary ="";
+    private String query ="";
 
     private int display =1;
 
     private int start =1;
-    private String sort ="random";
+    private String sort ="sim";
+
+    private String filter = "all";
 
     public MultiValueMap<String, String> toMutiValueMap(){
         var map = new LinkedMultiValueMap<String, String>();
 
-        map.add("query", quary);
+        map.add("query", query);
         map.add("display", String.valueOf(display));
         map.add("start",String.valueOf(start));
         map.add("sort",sort);
+        map.add("filter",filter);
+
         return map;
 
 

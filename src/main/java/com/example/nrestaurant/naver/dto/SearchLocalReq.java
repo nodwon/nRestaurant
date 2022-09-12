@@ -11,7 +11,7 @@ import org.springframework.util.MultiValueMap;
 @NoArgsConstructor
 public class SearchLocalReq {
 
-    private String quary ="";
+    private String query ="";
 
     private int display =1;
 
@@ -21,7 +21,7 @@ public class SearchLocalReq {
     public MultiValueMap<String, String> toMutiValueMap(){
         var map = new LinkedMultiValueMap<String, String>();
 
-        map.add("query", quary);
+        map.add("query", query);
         map.add("display", String.valueOf(display));
         map.add("start",String.valueOf(start));
         map.add("sort",sort);

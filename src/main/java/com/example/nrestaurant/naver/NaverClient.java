@@ -1,5 +1,7 @@
 package com.example.nrestaurant.naver;
 
+import com.example.nrestaurant.naver.dto.SearchImageReq;
+import com.example.nrestaurant.naver.dto.SearchImageRes;
 import com.example.nrestaurant.naver.dto.SearchLocalReq;
 import com.example.nrestaurant.naver.dto.SearchLocalRes;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,8 +29,8 @@ public class NaverClient {
     @Value(value = "${naver.url.search.image}")
     private String naverImageSearchUrl;
 
-    public SearchLocalRes SearchLocal(SearchLocalReq searchLocalReq){
-        var url = UriComponentsBuilder.fromUriString(naverLocalSearchUrl)
+    public SearchLocalRes searchLocal(SearchLocalReq searchLocalReq){
+        var uri = UriComponentsBuilder.fromUriString(naverLocalSearchUrl)
                 .queryParams(searchLocalReq.toMutiValueMap())
                 .build()
                 .encode()
@@ -40,18 +42,39 @@ public class NaverClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var httpEntity = new HttpEntity<>(headers);
-        var responeType = new ParameterizedTypeReference<SearchLocalRes>(){};
+        var responseType = new ParameterizedTypeReference<SearchLocalRes>(){};
 
         var responseEntity = new RestTemplate().exchange(
-                url,
+                uri,
                 HttpMethod.GET,
                 httpEntity,
-                responeType
+                responseType
 
         );
         return responseEntity.getBody();
     }
-    public void SearchImage(){
+    public SearchImageRes searchImage(SearchImageReq searchImageReq){
+        var uri = UriComponentsBuilder.fromUriString(naverLocalSearchUrl)
+                .queryParams(searchImageReq.toMutiValueMap())
+                .build()
+                .encode()
+                .toUri();
 
+        var headers = new HttpHeaders();
+        headers.set("X-Naver-Client-Id",naverClientId);
+        headers.set("X-Naver-Client-Secret",naverSecret);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var httpEntity = new HttpEntity<>(headers);
+        var responseType = new ParameterizedTypeReference<SearchImageRes>(){};
+
+        var responseEntity = new RestTemplate().exchange(
+                uri,
+                HttpMethod.GET,
+                httpEntity,
+                responseType
+
+        );
+        return responseEntity.getBody();
     }
 }
