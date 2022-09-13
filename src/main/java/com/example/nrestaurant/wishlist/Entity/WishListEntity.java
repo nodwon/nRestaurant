@@ -22,4 +22,5 @@ public class WishListEntity extends MemoryDbEntity {
     private boolean isVisit;            // 방문여부
     private int visitCount;             // 방문 카운트
     private LocalDateTime lastVisitDate;//방문일자
+
 }

@@ -8,5 +8,5 @@ public interface MemoryDbRepositoryIfs<T>{
     Optional<T> findById(int index);
     T save(T entity); //저장
     void deleteById(int index); // 삭제
-    List<T> listAll(); // 전체확인
+    List<T> findAll(); // 전체확인
 }

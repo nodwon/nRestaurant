@@ -3,6 +3,7 @@ package com.example.nrestaurant.naver;
 import com.example.nrestaurant.naver.dto.SearchImageReq;
 import com.example.nrestaurant.naver.dto.SearchImageRes;
 import com.example.nrestaurant.naver.dto.SearchLocalReq;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +23,7 @@ public class NaverClientTest {
 
         var result =naverClient.searchLocal(search);
         System.out.println(result);
+        Assertions.assertNotNull(result.getItems().stream().findFirst().get().getCategory());
     }
     @Test
     public void searchImageTest(){
